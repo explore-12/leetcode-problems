@@ -1,0 +1,34 @@
+class Solution:
+    def threeSum(self, num: List[int]) -> List[List[int]]:
+            # num=[-1,1,2,0,-4,-1]
+            # print(num)
+            num.sort()
+            # print(num)
+            
+            res=[] #empty list
+            
+            for i in range(len(num)):
+                if i>0 and num[i]==num[i-1]: #check wheather i>0 and num[i] value is same as num[i-1] if it is found then skip that ittration
+                    continue
+                
+                j=i+1
+                k=len(num)-1
+                # now we will compare j and k values only
+                # if j less than k perform 
+                while j<k:
+                    total=num[i]+num[j]+num[k]
+                    
+                    if total>0: # if we got total> value we need to move the k back word
+                        k-=1
+                    elif total<0: # if we got total< value we need to move j forward
+                        j+=1
+                    else:
+                        res.append([num[i],num[j],num[k]])
+                        j+=1
+                        
+                        # if any duplicates of j (means same as previous then jump j forward)
+                        # and ***remmeber it also should be less than k also
+                        while num[j]==num[j-1] and j<k :
+                            j+=1
+                        
+            return(res)
